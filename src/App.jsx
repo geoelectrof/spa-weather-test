@@ -2,7 +2,7 @@ import './App.css'
 import { useState } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import axios from 'axios'
-import { useEffect } from 'react'
+import CityModal from './components/cityModal'
 
 const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY
 
@@ -10,14 +10,7 @@ const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY
 function App() {
   const [cities, setCities] = useState([])
   const [searchText, setSearchText] = useState("")
-
-  // useEffect(() => {
-  //   axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=${apiKey}`)
-  //   .then(response => {
-  //     console.log(response.data)
-  //     setCities(response.data)
-  //   })
-  // },[])
+  const [cityModalShow, setCityModalShow] = useState(false)
 
   function fetchData(city){
     axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
@@ -38,28 +31,33 @@ function App() {
       <Container>
         <Row>
           <Col>
-            <Form.Control 
-              size="lg" 
-              type="text" 
-              placeholder="Search for city" 
+            <Form.Control
+              size="lg"
+              type="text"
+              placeholder="Search for city"
               value={searchText}
               onChange={(e) => handleChange(e)}
             />
           </Col>
         </Row>
         <Row>
-          {cities && cities.map((city, index) => {
-            return (
-              <div key={index}>
-                <h1>{city.name}</h1>
-                <p>
-                  {city.state} {city.country}
-                </p>
-              </div>
-            );
-          })}
+          {cities &&
+            cities.map((city, index) => {
+              return (
+                <div key={index} onClick={() => setCityModalShow(true)}>
+                  <h1>{city.name}</h1>
+                  <p>
+                    {city.state} {city.country}
+                  </p>
+                </div>
+              );
+            })}
         </Row>
       </Container>
+      <CityModal
+        show={cityModalShow}
+        onHide={() => setCityModalShow(false)}
+      />
     </>
   );
 }
