@@ -8,8 +8,8 @@ const CityWeather = ({lat, lon}) => {
     useEffect(() => {
         axios
           .get(
-            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=8&appid=${apiKey}`
-            // `https://api.openweathermap.org/data/2.5/forecast?lat=57&lon=-2.15&cnt=3&appid=${apiKey}`
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=8&appid=${apiKey}&units=metric`
+      
           )
           .then((response) => {
             console.log(response)
@@ -22,8 +22,16 @@ const CityWeather = ({lat, lon}) => {
         <div>
             {forecastList.map(weather => {
                 return (
-                    <div>{weather.weather[0].main}</div>
-                )
+                  <div key={weather.dt}>
+                    <h5>{new Date(weather.dt * 1000).toLocaleTimeString()}</h5>
+                    <img
+                      src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
+                      />
+                    <p>{weather.weather[0].main}</p>
+
+                    <hr />
+                  </div>
+                );
             })}
         </div>
     )
