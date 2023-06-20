@@ -29,12 +29,15 @@ const CityWeather = ({lat, lon}) => {
         <div>
             {forecastList && forecastList.map(weather => {
                 return (
-                  <div key={weather.dt} className="d-flex align-center">
+                  <div key={weather.dt}>
                     <h5>{new Date(weather.dt * 1000).toLocaleTimeString()}</h5>
                     <img
                       src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
-                      />
+                    />
                     <p>{weather.weather[0].main}</p>
+                    <p>Temperature: {weather.main.temp} °C</p>
+                    <p>Real Feel: {weather.main.feels_like} °C</p>
+                    <p>Humidity: {weather.main.humidity} %</p>
 
                     <hr />
                   </div>
