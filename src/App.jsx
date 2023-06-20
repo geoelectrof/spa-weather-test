@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import axios from 'axios'
 import CityModal from './components/cityModal'
+import City from './components/City'
 
 const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY
 
@@ -10,19 +11,23 @@ const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY
 function App() {
   const [cities, setCities] = useState([])
   const [searchText, setSearchText] = useState("")
-  const [cityModalShow, setCityModalShow] = useState(false)
 
-  function fetchData(city){
+function fetchData(city){
+    if (city) {
     axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
-      .then(response => {
-        setCities(response.data)
-      })
+        .then(response => {
+          setCities(response.data)
+        })
+        .catch(error => console.log(error))
+    } else {
+      setCities([])
+    }
   }
 
   function handleChange(e){
     console.log('e.target.value', e.target.value)
+    fetchData(e.target.value)
     setSearchText(e.target.value)
-    e.target.value ? fetchData(e.target.value) : setCities([])
   }
   console.log(cities)
 
@@ -44,20 +49,14 @@ function App() {
           {cities &&
             cities.map((city, index) => {
               return (
-                <div key={index} onClick={() => setCityModalShow(true)}>
-                  <h1>{city.name}</h1>
-                  <p>
-                    {city.state} {city.country}
-                  </p>
-                </div>
+                <City
+                  key={index}
+                  city={city}
+                />
               );
             })}
         </Row>
       </Container>
-      <CityModal
-        show={cityModalShow}
-        onHide={() => setCityModalShow(false)}
-      />
     </>
   );
 }
