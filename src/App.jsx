@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import { useState } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import axios from 'axios'
