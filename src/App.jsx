@@ -8,7 +8,7 @@ const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY
 
 
 function App() {
-  const [cities, setCities] = useState([{name: "athens"}, {name:"thessaloniki"}])
+  const [cities, setCities] = useState([])
   const [searchText, setSearchText] = useState("")
 
   // useEffect(() => {
@@ -27,8 +27,9 @@ function App() {
   }
 
   function handleChange(e){
+    console.log('e.target.value', e.target.value)
     setSearchText(e.target.value)
-    fetchData(e.target.value)
+    e.target.value ? fetchData(e.target.value) : setCities([])
   }
   console.log(cities)
 
@@ -37,15 +38,24 @@ function App() {
       <Container>
         <Row>
           <Col>
-            <Form.Control size="lg" type="text" placeholder="Search for city" onChange={(e) => handleChange(e)}/>
+            <Form.Control 
+              size="lg" 
+              type="text" 
+              placeholder="Search for city" 
+              value={searchText}
+              onChange={(e) => handleChange(e)}
+            />
           </Col>
         </Row>
         <Row>
           {cities && cities.map((city, index) => {
             return (
-              <h1 key={index}>
-                {city.name} {city.state} {city.country}
-              </h1>
+              <div key={index}>
+                <h1>{city.name}</h1>
+                <p>
+                  {city.state} {city.country}
+                </p>
+              </div>
             );
           })}
         </Row>
