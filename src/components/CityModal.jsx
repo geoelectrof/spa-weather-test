@@ -8,13 +8,15 @@ export default function CityModal(props) {
       // {...props}
       show={props.show}
       onHide={props.onHide}
-      size="lg"
+      size="s"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           {props.city.name}
+          <br />
+          
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

@@ -33,9 +33,9 @@ function fetchData(city){
 
   return (
     <>
-      <Container>
-        <Row>
-          <Col>
+      <Container className="pt-5">
+        <Row className="justify-content-md-center">
+          <Col xs lg="6">
             <Form.Control
               size="lg"
               type="text"
@@ -45,16 +45,13 @@ function fetchData(city){
             />
           </Col>
         </Row>
-        <Row>
-          {cities &&
-            cities.map((city, index) => {
-              return (
-                <City
-                  key={index}
-                  city={city}
-                />
-              );
+        <Row className="pt-3 justify-content-md-center">
+          <Col xs lg="6">
+            {cities &&
+              cities.map((city, index) => {
+                return <City key={index} city={city} />;
             })}
+          </Col>
         </Row>
       </Container>
     </>

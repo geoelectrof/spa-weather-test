@@ -7,11 +7,13 @@ const City = (props) => {
 
     return (
         <>
-            <div onClick={() => setCityModalShow(true)}>
-            <h1>{props.city.name}</h1>
-            <p>
-                {props.city.state} {props.city.country}
-            </p>
+            <div onClick={() => setCityModalShow(true)} className="bg-light rounded my-2 city-card">
+                <div className="py-2 px-4">
+                    <h1>{props.city.name}</h1>
+                    <p>
+                        {props.city.state} {props.city.country}
+                    </p>
+                </div>
             </div>
             <CityModal 
                 city={props.city}
