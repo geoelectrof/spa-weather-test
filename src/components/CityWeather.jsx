@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Button } from "react-bootstrap"
 const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY
 
 const CityWeather = ({lat, lon}) => {
@@ -25,6 +26,17 @@ const CityWeather = ({lat, lon}) => {
           .catch((error) => console.log("My error", error));
     }, [])
 
+      const exportData = () => {
+        const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+          JSON.stringify({...forecastList})
+        )}`;
+        const link = document.createElement("a");
+        link.href = jsonString;
+        link.download = "data.json";
+
+        link.click();
+      };
+
     return (
         <div>
             {forecastList && forecastList.map(weather => {
@@ -43,6 +55,7 @@ const CityWeather = ({lat, lon}) => {
                   </div>
                 );
             })}
+            <Button onClick={exportData}>Export Data</Button>
         </div>
     )
 }

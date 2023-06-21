@@ -3,6 +3,11 @@ import Modal from "react-bootstrap/Modal";
 import CityWeather from "./CityWeather";
 
 export default function CityModal(props) {
+
+  // const handleExportData = (data) => {
+  //   console.log(data)
+  // }
+
   return (
     <Modal
       // {...props}
@@ -27,6 +32,7 @@ export default function CityModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
+        {/* <Button onClick={}>Export Data</Button> */}
       </Modal.Footer>
     </Modal>
   );
