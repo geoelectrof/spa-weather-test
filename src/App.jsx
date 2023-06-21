@@ -2,7 +2,6 @@ import './App.scss'
 import { useState } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import axios from 'axios'
-import CityModal from './components/cityModal'
 import City from './components/City'
 
 const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY
@@ -25,11 +24,9 @@ function fetchData(city){
   }
 
   function handleChange(e){
-    console.log('e.target.value', e.target.value)
     fetchData(e.target.value)
     setSearchText(e.target.value)
   }
-  console.log(cities)
 
   return (
     <>

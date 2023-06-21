@@ -13,13 +13,9 @@ const CityWeather = ({lat, lon}) => {
       
           )
           .then((response) => {
-            console.log(response)
-            console.log(response.data.list)
             const today = new Date()
-            console.log("today.getDate()", today.getDate());
             let list = response.data.list.filter(item => {
                 return item.dt_txt.substr(8,2) == today.getDate()
-                // console.log( item.dt_txt.substr(8,2) )
             })
             setForecastList(list)
           })

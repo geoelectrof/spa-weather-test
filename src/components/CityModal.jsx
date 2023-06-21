@@ -4,13 +4,10 @@ import CityWeather from "./CityWeather";
 
 export default function CityModal(props) {
 
-  // const handleExportData = (data) => {
-  //   console.log(data)
-  // }
+
 
   return (
     <Modal
-      // {...props}
       show={props.show}
       onHide={props.onHide}
       size="s"
@@ -21,7 +18,7 @@ export default function CityModal(props) {
         <Modal.Title id="contained-modal-title-vcenter">
           {props.city.name}
           <br />
-          
+          Today's weather
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -32,7 +29,6 @@ export default function CityModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
-        {/* <Button onClick={}>Export Data</Button> */}
       </Modal.Footer>
     </Modal>
   );
